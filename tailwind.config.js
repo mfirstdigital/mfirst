@@ -1,0 +1,1 @@
+module.exports={darkMode:'class',content:['./docs/*.html','./docs/assets/*.js'],theme:{extend:{colors:{primary:'#0B5FFF',secondary:'#13C2C2',accent:'#FF8A00',dark:'#0F172A',bgLight:'#F8FAFC'},fontFamily:{poppins:['Poppins','sans-serif']}}}}

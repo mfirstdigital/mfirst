@@ -1,0 +1,16 @@
+name = "mfirst-api"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+routes = [{ pattern = "api.mfirst.in/*", zone_name = "mfirst.in" }]
+
+# Optional but recommended: shared rate-limit / replay state across Cloudflare locations.
+# 1) npx wrangler kv namespace create STATE   2) paste the id below and uncomment
+# [[kv_namespaces]]
+# binding = "STATE"
+# id = "PASTE_ID_HERE"
+
+[vars]
+ALLOWED_ORIGINS = "https://mfirst.in,https://www.mfirst.in"
+MAIL_FROM = "mFirst <noreply@mfirst.in>"
+MAIL_TO = "info@mfirst.in"
+# GSTIN = "your GSTIN (shown on payment receipts)"

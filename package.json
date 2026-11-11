@@ -1,0 +1,11 @@
+{
+ "name": "mfirst-site",
+ "private": true,
+ "scripts": {
+  "build:css": "tailwindcss -c tailwind.config.js -i tw.css -o docs/assets/tailwind.css --minify && cleancss -o docs/assets/site.css docs/assets/aos.css docs/assets/tailwind.css docs/assets/style.css"
+ },
+ "devDependencies": {
+  "tailwindcss": "^3.4.17",
+  "clean-css-cli": "^5.6.3"
+ }
+}
