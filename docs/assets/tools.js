@@ -18,4 +18,11 @@ if(pf){const out=$('#pf-out'),run=()=>{const n=+$('#pf-agents').value||0,wa=$('#
  pf.addEventListener('input',run);pf.addEventListener('change',run);run()}
 const sp=$('#social-proof');
 if(sp)fetch('assets/data/testimonials.json').then(r=>r.json()).then(d=>{const T=d.testimonials||[];if(!T.length)return;const s=mk('section','py-16 bg-bgLight dark:bg-dark'),w=mk('div','max-w-6xl mx-auto px-4 sm:px-6'),g=mk('div','grid md:grid-cols-3 gap-6');w.appendChild(mk('h2','text-3xl font-extrabold text-center text-dark dark:text-white mb-8','What Our Clients Say'));
- T.forEach(t=>{const c=mk('figure','bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm');c.append(mk('blockquote','text-gray-700 dark:text-gray-200 mb-4','“'+t.quote+'”'),mk('figcaption','text-sm font-semibold text-dark dark:text-white',t.name+(t.role?', '+t.role:'')+(t.company?' · '+t.company:'')));g.appendChild(c)});w.appendChild(g);s.appendChild(w);sp.appendChild(s)}).catch(()=>{})})();
+ T.forEach(t=>{const c=mk('figure','bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm');c.append(mk('blockquote','text-gray-700 dark:text-gray-200 mb-4','“'+t.quote+'”'),mk('figcaption','text-sm font-semibold text-dark dark:text-white',t.name+(t.role?', '+t.role:'')+(t.company?' · '+t.company:'')));g.appendChild(c)});w.appendChild(g);s.appendChild(w);sp.appendChild(s)}).catch(()=>{})
+const hero=$('#home');if(hero){const S=[...hero.querySelectorAll('[data-slide]')],D=[...hero.querySelectorAll('.hero-dot')],P=$('#hero-pause'),N=D.length||1;let i=0,tm=null,paused=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const show=n=>{i=n;S.forEach(e=>{const on=+e.dataset.slide===i;e.classList.toggle('slide-off',!on)});D.forEach((d,k)=>d.setAttribute('aria-current',k===i?'true':'false'))};
+ const stop=()=>{clearInterval(tm);tm=null},play=()=>{stop();if(!paused)tm=setInterval(()=>show((i+1)%N),7000)};
+ const label=()=>{if(P){P.setAttribute('aria-pressed',paused);P.setAttribute('aria-label',paused?'Play slideshow':'Pause slideshow');P.innerHTML=paused?'&#9654;':'&#10074;&#10074;'}};
+ D.forEach((d,k)=>d.addEventListener('click',()=>{show(k);play()}));if(P)P.addEventListener('click',()=>{paused=!paused;label();play()});
+ hero.addEventListener('mouseenter',stop);hero.addEventListener('mouseleave',play);hero.addEventListener('focusin',stop);hero.addEventListener('focusout',play);label();show(0);play()}
+})();
